@@ -12,3 +12,7 @@ commands:
         usage: /randomchest
         permission: randomchest.command
         aliases: [rc]
+    reload:
+        description: Reload the plugin
+        usage: /reload
+        permission: randomchest.reload

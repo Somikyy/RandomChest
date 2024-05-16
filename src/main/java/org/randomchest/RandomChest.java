@@ -1,5 +1,7 @@
 package org.randomchest;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,20 +24,18 @@ public final class RandomChest extends JavaPlugin {
         }
 
         for (String chestName : chestSection.getKeys(false)) {
-            String world = configManager.getConfig().getString("chests." + chestName + ".world");
-            List<String> locations = configManager.getConfig().getStringList("chests." + chestName + ".Coordinated");
-            int chance = configManager.getConfig().getInt("chests." + chestName + ".chest-spawn-chance");
-            boolean refresh = configManager.getConfig().getBoolean("chests." + chestName + ".chest-refresh");
-            int refreshTime = configManager.getConfig().getInt("chests." + chestName + ".chest-refresh-time");
+            String world = configManager.getConfig().getString("general.Chests." + chestName + ".World");
+            List<String> locations = configManager.getConfig().getStringList("general.Chests." + chestName + ".Coordinated");
+            int chance = configManager.getConfig().getInt("general.Chests." + chestName + ".chest-spawn-chance");
+            boolean refresh = configManager.getConfig().getBoolean("general.Chests." + chestName + ".chest-refresh");
+            int refreshTime = configManager.getConfig().getInt("general.Chests." + chestName + ".chest-refresh-time");
+            System.out.println("Refresh time for chest " + chestName + ": " + refreshTime);
 
             for (String location : locations) {
                 String[] coords = location.split(", ");
                 int x = Integer.parseInt(coords[0]);
                 int y = Integer.parseInt(coords[1]);
                 int z = Integer.parseInt(coords[2]);
-
-                // Use these values to initialize your plugin
-                // For example, you can create a new Chest object and add it to a list of chests
             }
         }
     }
@@ -43,6 +43,11 @@ public final class RandomChest extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    public void reloadPluginConfig() {
+        this.reloadConfig();
+        configManager.reloadConfig();
     }
 
     public ConfigManager getConfigManager() {

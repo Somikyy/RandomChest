@@ -49,4 +49,9 @@ public class ConfigManager {
             plugin.getLogger().severe("Could not save config to " + configFile);
         }
     }
+
+    public void reloadConfig() {
+        this.plugin.reloadConfig();
+        this.config = this.plugin.getConfig();
+    }
 }

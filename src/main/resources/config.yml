@@ -12,19 +12,20 @@ general:
   Chests:
     Example_chest:
       Chest-type: CHEST #or TRAPPED_CHEST, SHALKER_BOX, BARREL, DISPENSER, DROPPER, HOPPER
-      Wolrd: world
+      World: world
       Coordinated:
         - "0, 98, 0"
         - "1, 100, 1"
         - "2, 102, 2"
         # etc...
-      chest-spawn-chance: 100
-      chest-refresh: true
-      chest-refresh-time: 60
+      chest-spawn-chance: 100 #GLOBAL METHODE, apply to all chests
+      chest-refresh: true #GLOBAL METHODE, apply to all chests
+      chest-refresh-time: 15 #GLOBAL METHODE, apply to all chests
       Items:
-        Item1:
+        item1:
           item-type: BLOCK
           Material: DIAMOND
+          Item-Chance: 50
           Amount:
             min: 1
             max: 64
@@ -37,9 +38,11 @@ general:
             - "DAMAGE_ALL, 1"
             - "DURABILITY, 1"
 
-        Item2:
+        item2:
           item-type: POTION
-          Potion-type: normal, splash or lingering
+          Material: POTION
+          Item-Chance: 50
+          Potion-type: normal #, splash or lingering
           Amount:
             min: 1
             max: 64
