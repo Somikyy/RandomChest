@@ -7,6 +7,7 @@ public final class RandomChest extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        this.getCommand("randomchest").setExecutor(new RDCommandExecutor());
 
     }
 

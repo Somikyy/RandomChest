@@ -1,0 +1,44 @@
+RandomChest is a plugin that should handle the custom chest spawn.
+In configuration of this plugin you, the administrator, should set all the needed information about:
+Chests
+    type of chest
+    world spawn for chest
+    coordinates for the chest to spawn
+    chest spawn chance.
+    chest refresh (true/false)
+    chest refresh time (only if true, in seconds.)
+    items that should be in the chest (in random slots of the chest)
+        items information (depending on the item type)
+        if block:
+            it should ask a material
+            amount
+            item name
+            item lore
+            enchantments
+        if potion:
+            potion type
+            item name
+            item lore
+            potion effects
+
+Example of the configuration:
+(look for config.yml in the plugin folder)
+
+Administrator should be able to add as many custom chests as he wants.
+The plugin should handle the spawn of the chest in the world, and the refresh of the chest if needed.
+The plugin should handle the items that are in the chest, and the randomization of the items in the chest.
+
+The plugin should be able to handle the following commands:
+
+/rc addchest <chestname> <world> <x> <y> <z> <chance> <refresh> <refresh_time> # to add a existing chest "type" to the world
+for example of the Example_chest which is precreated in the config.yml:
+/rc addchest Example_chest world 0 100 0 100 true 60
+
+to remove chest from the place in the world:
+administrator should be able to break the chest and the plugin should remove the chest from the world.
+but if the chest is breaked by the player, the plugin should not remove the chest from the configuration file. (this means the chest will renew in the same place after the refresh time)
+
+The plugin should be able to handle the following permissions:
+
+randomchest.admin - to add and remove the chests
+randomchest.use - to open the chest

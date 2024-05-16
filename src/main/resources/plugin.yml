@@ -1,7 +1,14 @@
 name: RandomChest
 version: '${project.version}'
 main: org.randomchest.RandomChest
-api-version: '1.20'
+api-version: '1.18'
 prefix: RCHEST
 authors: [somikyy]
 description: Random chest plugin for michael schenll.
+
+commands:
+    randomchest:
+        description: Random chest command
+        usage: /randomchest
+        permission: randomchest.command
+        aliases: [rc]

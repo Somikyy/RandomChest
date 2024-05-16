@@ -1,0 +1,56 @@
+############################################
+#       Random Chest Configuration         #
+#   This is a test plugin made by somikyy  #
+#           to Michael Schnell.            #
+############################################
+
+# The plugin prefix
+prefix: RCHEST
+
+# The plugin version
+version: 1.0
+
+# The General Configuration
+general:
+  Chests:
+    Example_chest:
+      Chest-type: CHEST #or TRAPPED_CHEST, SHALKER_BOX, BARREL, DISPENSER, DROPPER, HOPPER
+      Wolrd: world, world2
+      Coordinated:
+        - "x1, y1, z1, world"
+        - "x2, y2, z2, world2"
+        - "x3, y3, z3, world"
+        # etc...
+      chest-spawn-chance: 100
+      Items:
+        Item1:
+          item-type: BLOCK
+          Material: DIAMOND
+          Amount:
+            min: 1
+            max: 64
+          Item-name: "&6Diamond"
+          Item-lore:
+            - "&7This is a diamond"
+            - "&7And he is shiny!"
+            # etc...
+          Enchantments:
+            - "DAMAGE_ALL, 1"
+            - "DURABILITY, 1"
+
+        Item2:
+          item-type: POTION
+          Potion-type: normal, splash or lingering
+          Amount:
+            min: 1
+            max: 64
+          Item-name: "&6Potion"
+          Item-lore:
+            - "&7This is a potion"
+            - "&7And he is spicy!"
+            # etc...
+          Potion-Effects:
+            - "SPEED, 1, 100"
+            - "INCREASE_DAMAGE, 1, 100"
+        # Other Items here...
+    # Other Chests here...
