@@ -1,0 +1,7 @@
+name: RandomChest
+version: '${project.version}'
+main: org.randomchest.RandomChest
+api-version: '1.20'
+prefix: RCHEST
+authors: [somikyy]
+description: Random chest plugin for michael schenll.
