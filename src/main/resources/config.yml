@@ -4,9 +4,6 @@
 #           to Michael Schnell.            #
 ############################################
 
-# The plugin prefix
-prefix: RCHEST
-
 # The plugin version
 version: 1.0
 
@@ -15,13 +12,15 @@ general:
   Chests:
     Example_chest:
       Chest-type: CHEST #or TRAPPED_CHEST, SHALKER_BOX, BARREL, DISPENSER, DROPPER, HOPPER
-      Wolrd: world, world2
+      Wolrd: world
       Coordinated:
-        - "x1, y1, z1, world"
-        - "x2, y2, z2, world2"
-        - "x3, y3, z3, world"
+        - "0, 98, 0"
+        - "1, 100, 1"
+        - "2, 102, 2"
         # etc...
       chest-spawn-chance: 100
+      chest-refresh: true
+      chest-refresh-time: 60
       Items:
         Item1:
           item-type: BLOCK
