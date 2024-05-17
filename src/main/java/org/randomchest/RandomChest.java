@@ -9,11 +9,13 @@ import java.util.List;
 
 public final class RandomChest extends JavaPlugin {
     private ConfigManager configManager;
+    private ChestRefresher chestRefresher;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         this.getCommand("randomchest").setExecutor(new RDCommandExecutor(this));
+        this.getCommand("refreshchest").setExecutor(new RefreshChestCommand(this));
         configManager = new ConfigManager(this);
 
         configManager.loadConfig();
@@ -38,6 +40,9 @@ public final class RandomChest extends JavaPlugin {
                 int z = Integer.parseInt(coords[2]);
             }
         }
+
+        chestRefresher = new ChestRefresher(this);
+        chestRefresher.runTaskTimer(this, 0L, 20L);
     }
 
     @Override
@@ -52,5 +57,8 @@ public final class RandomChest extends JavaPlugin {
 
     public ConfigManager getConfigManager() {
     return configManager;
+    }
+    public ChestRefresher getChestRefresher() {
+        return chestRefresher;
     }
 }

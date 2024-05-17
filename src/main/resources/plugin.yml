@@ -16,3 +16,7 @@ commands:
         description: Reload the plugin
         usage: /reload
         permission: randomchest.reload
+    refreshchest:
+        description: Refresh the chests
+        usage: /<command> <chestName>
+        permission: randomchest.refresh
