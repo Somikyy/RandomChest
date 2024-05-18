@@ -1,12 +1,12 @@
 package org.randomchest;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
@@ -41,6 +41,13 @@ public class RDCommandExecutor implements CommandExecutor {
                         int x = Integer.parseInt(args[3]);
                         int y = Integer.parseInt(args[4]);
                         int z = Integer.parseInt(args[5]);
+
+                        Block block = Bukkit.getWorld(world).getBlockAt(x, y, z);
+
+                        if (block.getType() == Material.CHEST) {
+                            sender.sendMessage(ChatColor.RED + "A chest already exists at this location.");
+                            return true;
+                        }
 
                         FileConfiguration config = plugin.getConfigManager().getConfig();
                         String chestTypeString = config.getString("general.Chests." + chestName + ".Chest-type");
@@ -109,7 +116,7 @@ public class RDCommandExecutor implements CommandExecutor {
 
                         chestCreator.createChest(world, x, y, z, items.toArray(new ItemStack[0]), chestType);
 
-                        sender.sendMessage(ChatColor.GREEN + "Chest added!");
+                        sender.sendMessage(ChatColor.GREEN + "You created " + chestName + " at " + x + ", " + y + ", " + z);
                         return true;
                     } else {
                         sender.sendMessage(ChatColor.RED + "Usage: /randomchest addchest <chest_name> <world> <x> <y> <z>");

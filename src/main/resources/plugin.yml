@@ -20,3 +20,17 @@ commands:
         description: Refresh the chests
         usage: /<command> <chestName>
         permission: randomchest.refresh
+
+permissions:
+    randomchest.command:
+        description: Allow the player to use the randomchest command
+        default: true
+    randomchest.reload:
+        description: Allow the player to reload the plugin
+        default: op
+    randomchest.refresh:
+        description: Allow the player to refresh the chests
+        default: op
+    randomchest.delete:
+        description: Allow the player to delete the chests
+        default: op

@@ -1,7 +1,5 @@
 package org.randomchest;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,9 +11,13 @@ public final class RandomChest extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         // Plugin startup logic
         this.getCommand("randomchest").setExecutor(new RDCommandExecutor(this));
         this.getCommand("refreshchest").setExecutor(new RefreshChestCommand(this));
+
+        getServer().getPluginManager().registerEvents(new ChestBreakListener(this), this);
+
         configManager = new ConfigManager(this);
 
         configManager.loadConfig();

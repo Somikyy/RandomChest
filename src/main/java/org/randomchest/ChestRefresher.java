@@ -15,11 +15,12 @@ import java.util.List;
 
 public class ChestRefresher extends BukkitRunnable {
     private final RandomChest plugin;
+    private final ChestDisplayManager displayManager;
 
     public ChestRefresher(RandomChest plugin) {
         this.plugin = plugin;
+        this.displayManager = new ChestDisplayManager(plugin);
     }
-
     @Override
     public void run() {
         ConfigurationSection chestSection = plugin.getConfigManager().getConfig().getConfigurationSection("general.Chests");
@@ -32,6 +33,8 @@ public class ChestRefresher extends BukkitRunnable {
                     if ((System.currentTimeMillis() / 1000) % refreshTime == 0) {
                         // Refresh the chest
                         refreshChest(chestName);
+                        // Display the refresh time
+                        displayManager.displayRefreshTime(chestName);
                     }
                 }
             }
@@ -104,6 +107,7 @@ public class ChestRefresher extends BukkitRunnable {
                     }
                 } else {
                     createChest(chestLocation);
+                    refreshChest(chestName);
                 }
             }
         }
