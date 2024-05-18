@@ -9,50 +9,50 @@ version: 1.0
 
 # The General Configuration
 general:
-  Chests:
-    Example_chest:
-      Chest-type: CHEST #or TRAPPED_CHEST, SHALKER_BOX, BARREL, DISPENSER, DROPPER, HOPPER
-      World: world
-      Coordinated:
-        - "0, 98, 0"
-        - "1, 100, 1"
-        - "2, 102, 2"
-        # etc...
-      chest-spawn-chance: 100 #GLOBAL METHODE, apply to all chests
-      chest-refresh: true #GLOBAL METHODE, apply to all chests
-      chest-refresh-time: 15 #GLOBAL METHODE, apply to all chests
-      Items:
-        item1:
-          item-type: BLOCK
-          Material: DIAMOND
-          Item-Chance: 50
-          Amount:
-            min: 1
-            max: 64
-          Item-name: "&6Diamond"
-          Item-lore:
-            - "&7This is a diamond"
-            - "&7And he is shiny!"
-            # etc...
-          Enchantments:
-            - "DAMAGE_ALL, 1"
-            - "DURABILITY, 1"
+    Chests:
+      Example_chest:
+        Chest-type: CHEST #or TRAPPED_CHEST, SHALKER_BOX, BARREL, DISPENSER, DROPPER, HOPPER
+        World: world
+        Coordinated:
+          - "0, 98, 0"
+          - "1, 100, 1"
+          - "2, 102, 2"
+          # etc...
+        chest-spawn-chance: 100 #GLOBAL METHODE, apply to all chests
+        chest-refresh: true #GLOBAL METHODE, apply to all chests
+        chest-refresh-time: 15 #GLOBAL METHODE, apply to all chests
+        Items:
+          item1:
+            item-type: BLOCK
+            Material: DIAMOND
+            Item-Chance: 50
+            Amount:
+              min: 1
+              max: 64
+            Item-name: "&6Diamond"
+            Item-lore:
+              - "&7This is a diamond"
+              - "&7And he is shiny!"
+              # etc...
+            Enchantments:
+              - "DAMAGE_ALL, 1"
+              - "DURABILITY, 1"
 
-        item2:
-          item-type: POTION
-          Material: POTION
-          Item-Chance: 50
-          Potion-type: normal #, splash or lingering
-          Amount:
-            min: 1
-            max: 64
-          Item-name: "&6Potion"
-          Item-lore:
-            - "&7This is a potion"
-            - "&7And he is spicy!"
-            # etc...
-          Potion-Effects:
-            - "SPEED, 1, 100"
-            - "INCREASE_DAMAGE, 1, 100"
-        # Other Items here...
-    # Other Chests here...
+          item2:
+            item-type: POTION
+            Material: POTION
+            Item-Chance: 50
+            Potion-type: normal #, splash or lingering
+            Amount:
+              min: 1
+              max: 64
+            Item-name: "&6Potion"
+            Item-lore:
+              - "&7This is a potion"
+              - "&7And he is spicy!"
+              # etc...
+            Potion-Effects:
+              - "SPEED, 1, 100"
+              - "INCREASE_DAMAGE, 1, 100"
+          # Other Items here...
+      # Other Chests here...

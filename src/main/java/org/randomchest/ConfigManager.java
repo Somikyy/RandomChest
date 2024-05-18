@@ -51,6 +51,7 @@ public class ConfigManager {
     }
 
     public void reloadConfig() {
+        saveConfig();
         this.plugin.reloadConfig();
         this.config = this.plugin.getConfig();
     }

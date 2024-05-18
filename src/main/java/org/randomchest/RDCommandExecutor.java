@@ -9,10 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class RDCommandExecutor implements CommandExecutor {
     private final RandomChest plugin;
@@ -33,20 +30,17 @@ public class RDCommandExecutor implements CommandExecutor {
 
         if (command.getName().equalsIgnoreCase("randomchest")) {
             if (args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "Usage: /randomchest addchest <chest_name> <world> <x> <y> <z> <chance> <refresh> <refresh_time>");
+                sender.sendMessage(ChatColor.RED + "Usage: /randomchest addchest <chest_name> <world> <x> <y> <z>");
                 return true;
             }
             if (args.length > 0) {
                 if (args[0].equalsIgnoreCase("addchest")) {
-                    if (args.length == 9) {
+                    if (args.length == 6) {
                         String chestName = args[1];
                         String world = args[2];
                         int x = Integer.parseInt(args[3]);
                         int y = Integer.parseInt(args[4]);
                         int z = Integer.parseInt(args[5]);
-                        int chance = Integer.parseInt(args[6]);
-                        boolean refresh = Boolean.parseBoolean(args[7]);
-                        int refreshTime = Integer.parseInt(args[8]);
 
                         FileConfiguration config = plugin.getConfigManager().getConfig();
                         String chestTypeString = config.getString("general.Chests." + chestName + ".Chest-type");
@@ -66,21 +60,24 @@ public class RDCommandExecutor implements CommandExecutor {
                         ChestCreator chestCreator = new ChestCreator();
                         chestCreator.createChest(world, x, y, z, new ItemStack[0], chestType);
 
+                        ConfigurationSection chestsSection = config.getConfigurationSection("general.Chests");
+                        for (String chestNameKey : chestsSection.getKeys(false)) {
+                            List<String> coordinatesList = config.getStringList("general.Chests." + chestNameKey + ".Coordinated");
+                            String newCoordinate = x + ", " + y + ", " + z;
+                            if (coordinatesList.contains(newCoordinate)) {
+                                sender.sendMessage(ChatColor.RED + "A chest already exists at the specified location in the configuration.");
+                                return true;
+                            }
+                        }
+
                         List<ItemStack> items = new ArrayList<>();
                         ConfigurationSection itemsSection = config.getConfigurationSection("general.Chests." + chestName + ".Items");
                         for (String key : itemsSection.getKeys(false)) {
                             String itemType = config.getString("general.Chests." + chestName + ".Items." + key + ".item-type");
                             String material = config.getString("general.Chests." + chestName + ".Items." + key + ".Material");
 
-                            System.out.println("Creating item with itemType: " + itemType + ", material: " + material);
-
                             int minAmount = config.getInt("general.Chests." + chestName + ".Items." + key + ".Amount.min");
                             int maxAmount = config.getInt("general.Chests." + chestName + ".Items." + key + ".Amount.max");
-
-                            List<String> coordinates = config.getStringList("general.Chests." + chestName + ".Coordinated");
-                            coordinates.add(x + ", " + y + ", " + z);
-                            config.set("general.Chests." + chestName + ".Coordinated", coordinates);
-                            plugin.getConfigManager().saveConfig();
 
                             String itemName = config.getString("general.Chests." + chestName + ".Items." + key + ".Item-name");
                             List<String> itemLore = config.getStringList("general.Chests." + chestName + ".Items." + key + ".Item-lore");
@@ -88,7 +85,6 @@ public class RDCommandExecutor implements CommandExecutor {
                             String potionType = config.getString("general.Chests." + chestName + ".Items." + key + ".Potion-type");
                             List<String> potionEffects = config.getStringList("general.Chests." + chestName + ".Items." + key + ".Potion-Effects");
                             int itemChance = config.getInt("general.Chests." + chestName + ".Items." + key + ".Item-Chance");
-
 
                             Random random = new Random();
                             if (random.nextInt(100) < itemChance) {
@@ -104,20 +100,25 @@ public class RDCommandExecutor implements CommandExecutor {
                             }
                         }
 
+                        List<String> coordinates = config.getStringList("general.Chests." + chestName + ".Coordinated");
+                        coordinates.add(x + ", " + y + ", " + z);
+                        config.set("general.Chests." + chestName + ".Coordinated", coordinates);
+                        plugin.getConfigManager().saveConfig();
+
                         Collections.shuffle(items);
 
                         chestCreator.createChest(world, x, y, z, items.toArray(new ItemStack[0]), chestType);
 
-                        sender.sendMessage(ChatColor.GREEN + "Chest destination added!");
+                        sender.sendMessage(ChatColor.GREEN + "Chest added!");
                         return true;
                     } else {
-                        sender.sendMessage(ChatColor.RED + "Usage: /randomchest addchest <chest_name> <world> <x> <y> <z> <chance> <refresh> <refresh_time>");
+                        sender.sendMessage(ChatColor.RED + "Usage: /randomchest addchest <chest_name> <world> <x> <y> <z>");
                         return true;
                     }
                 }
 
                 if (args[0].equalsIgnoreCase("reload")) {
-                    plugin.reloadConfig();
+                    plugin.getConfigManager().reloadConfig();
                     sender.sendMessage(ChatColor.GREEN + "Config reloaded!");
                     return true;
                 }
