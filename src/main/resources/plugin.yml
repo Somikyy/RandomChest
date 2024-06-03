@@ -24,7 +24,7 @@ commands:
 permissions:
     randomchest.command:
         description: Allow the player to use the randomchest command
-        default: true
+        default: op
     randomchest.reload:
         description: Allow the player to reload the plugin
         default: op
